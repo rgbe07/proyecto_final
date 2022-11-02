@@ -22,8 +22,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'book:book-list' %}">Libros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Secciones</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">EBooks</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'book:section-list' %}">Secciones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'book:ebook-list' %}">EBooks</a></li>
                     </ul>
                 </div>
             </div>
@@ -34,6 +34,8 @@
                 <h1 class="fw-bolder">Bienvenido a la Librería</h1>
                 <p class="lead">Puedes encontrar libros y ebooks de diferentes temas y clasificaciones</p>
                 <a class="btn btn-lg btn-light" href="{% url 'book:book-add' %}">Crear Libro</a>
+                <a class="btn btn-lg btn-light" href="{% url 'book:section-add' %}">Crear Sección</a>
+                <a class="btn btn-lg btn-light" href="{% url 'book:ebook-add' %}">Crear EBook</a>
             </div>
         </header>
         <div >

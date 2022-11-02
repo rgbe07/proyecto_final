@@ -1,0 +1,18 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+
+{% block library_content %}
+
+    {% for section in sections %}
+        <!-- Post preview-->
+        <div class="container px-4">
+            <p>La seccion es {{ section.name }}</p>
+            <p>clasificación: {{ section.clasification }}</p>
+           
+        </div>
+        <!-- Divider-->
+        <hr/>
+    {% endfor %}
+
+{% endblock %}
