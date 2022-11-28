@@ -8,7 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Scrolling Nav - Start Bootstrap Template</title>
+        <title>Library - BookStore
+            {% block my_blog_title %}
+                 Home
+            {% endblock %}
+        </title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'home/css/styles.css' %}" rel="stylesheet" />
@@ -24,15 +28,43 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'book:book-list' %}">Libros</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'book:section-list' %}">Secciones</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'book:ebook-list' %}">EBooks</a></li>
+                        <div></div>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home:user-update' %}">Editar usuario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión - {{ user.username }}</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
+        {% block library_header %}
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white">
-            <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Bienvenido a la Librería</h1>
-                <p class="lead">Puedes encontrar libros y ebooks de diferentes temas y clasificaciones</p>
+                <div class="container px-4 text-center">
+                
+                    <h1 class="fw-bolder">Bienvenido a la Librería</h1>
+                    <p class="lead">Puedes encontrar libros y ebooks de diferentes temas y clasificaciones</p>
+                    {% if user.is_authenticated %}
+                            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                            <h4>Bienvenido</h4>
+                    {% else %}
+                             <span>Tu libreria completa</span>
+                    {% endif %}
+                    {% if avatar_url %}
+                        <a href="{% url 'home:avatar-load' %}"><img height="260px" src="{{avatar_url}}"></a>
+                    {% endif %}
+                </div>
+                 <!-- <div style="background-color: #ffffff; width: 87%;" color>Avatar URL: {{ avatar_url }}</div> -->
+                {% if not avatar_url %}
+                    <a class="button_custom" href="{% url 'home:avatar-load' %}">Cargar Avatar</a>
+                {% endif %}
+                </div>
+                </header>
+        {% endblock %}
+            
+            
                 <a class="btn btn-lg btn-light" href="{% url 'book:book-add' %}">Crear Libro</a>
                 <a class="btn btn-lg btn-light" href="{% url 'book:section-add' %}">Crear Sección</a>
                 <a class="btn btn-lg btn-light" href="{% url 'book:ebook-add' %}">Crear EBook</a>
@@ -51,19 +83,69 @@
         </div>
 
         {% block library_content %}
-      <!-- content section-->
-        <section class="bg-light" id="content">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2>Content</h2>
-                        <p class="lead"></p>
+                <!-- Buscador -->
+                <h2>Buscador de libros</h2>
+                <form action="{% url 'home:search' %}" method="GET">
+                    <div>
+                        <input type="text" name="search_param" id="book_name" placeholder="Buscar.."
+                        {% if search_param %} value="{{ search_param }}" {% endif %}
+                        >
+                        <input type="submit" value="Buscar">
+                        <a style="color: blue" href="{% url 'home:index' %}"><i class="fa fa-undo"></i></a>
                     </div>
+                </form>
+                <!-- Divider-->
+                <hr class="my-4" />
+
+                <!-- Si hay resultados en el buscador los presenta -->
+                {% if books %}
+                    {% for book in books %}
+                        <!-- Post preview-->
+                        <div class="post-preview">
+                            <a href="{% url 'book:book-detail' book.id %}">
+                                <h2 class="post-title">Este es el libro de {{ book.name }}</h2>
+                                <h3 class="post-subtitle">Que tiene el código: {{ book.author }}</h3>
+                            </a>
+                            <p class="post-meta">
+                                Creado por
+                                <span style="color: #0b4956;" href="">{{ book.owner.username }}</span>
+                                ( {{ book.name }} )
+                            </p>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                    {% endfor %}
+                {% endif %}
+        {% endblock %}
+
+        {% block pagination %}
+            <!--Pagination Class Based Views-->
+            {% if is_paginated %}
+            <div class="container p-4">
+                <div class="pagination justify-content-center">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a> |
+                            <a href="?page={{ book_list.previous_page_number }}">previous</a> |
+                        {% endif %}
+            
+                        {% if page_obj.paginator.num_pages > 1 %}
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} |
+                        </span>
+                        {% endif %}
+            
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a> |
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
                 </div>
             </div>
-        </section>
-
+            {% endif %}
+            <!--end of Pagination-->
         {% endblock %}
+
  
         <!-- Footer-->
         <footer class="py-5 bg-dark">

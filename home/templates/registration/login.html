@@ -1,0 +1,30 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block library_title %}
+    Login
+{% endblock %}
+
+{% block library_header %}
+<header>
+    <div>
+                    <h1>Login</h1>
+                    <span>My library</span>
+        <a class="button_custom" href="{% url 'home:user-register' %}">Registrar nuevo usuario</a>
+    </div>
+</header>
+{% endblock %}
+
+{% block library_content %}
+
+{% if form.errors %}
+<p style="color: red">Combinación de username y password incorrecta, intenta de nuevo.</p>
+{% endif %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Iniciar Sesión" />
+</form>
+
+{% endblock %}

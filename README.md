@@ -39,17 +39,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 5. Navegamos hacia la carpeta del proyecto `library`
-```bash
-cd library
-```
-
-### 6. Se crean las migraciones que son una "plantilla" para crear la base de datos con la que trabajará nuestro proyecto de Django
+### 5. Se crean las migraciones que son una "plantilla" para crear la base de datos con la que trabajará nuestro proyecto de Django
 ```bash
 python manage.py makemigrations
 ```
 
-### 7. Se ejecuta la migración para crear la base de datos con la que trabajará nuestro proyecto de Django
+### 6. Se ejecuta la migración para crear la base de datos con la que trabajará nuestro proyecto de Django
 ```bash
 python manage.py migrate
 ```

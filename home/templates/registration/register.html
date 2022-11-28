@@ -1,0 +1,25 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block library_title %}
+Register
+{% endblock %}
+
+{% block library_header %}
+<header>
+    <div>
+                    <h1>Registrar Nuevo Usuario</h1>
+                    <span class="subheading">My library</span>
+    </div>
+</header>
+{% endblock %}
+
+{% block library_content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Registrar usuario" />
+</form>
+
+{% endblock %}

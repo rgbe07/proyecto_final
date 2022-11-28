@@ -1,4 +1,9 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
+
+from book.models import Book
+from book.models import EBook
+from book.models import Section
 
 class BookForm(forms.Form):
     name = forms.CharField(
@@ -48,6 +53,18 @@ class BookForm(forms.Form):
             }
         ),
     )
+
+    description = forms.CharField(
+        label="Descripción:",
+        required=False,
+        widget=CKEditorWidget(),
+    )
+
+    image = forms.ImageField()
+
+    class Meta:
+        model = Book
+        fields = ["name", "author", "description", "image"]
 
 class EBookForm(forms.Form):
     name = forms.CharField(
@@ -124,3 +141,23 @@ class SectionForm(forms.Form):
         ),
     )
     
+class CommentForm(forms.Form):
+    comment_text = forms.CharField(
+        label="",
+        required=False,
+        max_length=500,
+        min_length=10,
+        strip=True,
+        widget=forms.Textarea(
+            attrs={
+                "class": "comment-text",
+                "placeholder": "Ingrese su comentario...",
+                "required": "True",
+                "max_length": 500,
+                "min_length": 10,
+                "rows": 2,
+                "cols": 10,
+                "style":"min-width: 100%",
+            }
+        ),
+    )    
