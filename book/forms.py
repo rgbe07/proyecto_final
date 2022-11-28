@@ -5,7 +5,7 @@ from book.models import Book
 from book.models import EBook
 from book.models import Section
 
-class BookForm(forms.Form):
+class BookForm(forms.ModelForm):
     name = forms.CharField(
         label="Nombre del Libro",
         required=False,
@@ -49,7 +49,7 @@ class BookForm(forms.Form):
             attrs={
                 "class": "book-publisher",
                 "placeholder": "Editorial del Libro",
-                "required": "True",
+                "required": "False",
             }
         ),
     )
@@ -60,13 +60,15 @@ class BookForm(forms.Form):
         widget=CKEditorWidget(),
     )
 
-    image = forms.ImageField()
+    image = forms.ImageField(
+        required=False,
+    )
 
     class Meta:
         model = Book
-        fields = ["name", "author", "description", "image"]
+        fields = ["name", "isbn", "author", "publisher", "description", "image"]
 
-class EBookForm(forms.Form):
+class EBookForm(forms.ModelForm):
     name = forms.CharField(
         label="Nombre del Libro",
         required=False,
@@ -116,7 +118,7 @@ class EBookForm(forms.Form):
     )
 
 
-class SectionForm(forms.Form):
+class SectionForm(forms.ModelForm):
     name = forms.CharField(
         label="Seccion",
         required=False,

@@ -13,7 +13,7 @@
                  Home
             {% endblock %}
         </title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="{% static 'home/assets/favicon.ico' %}" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'home/css/styles.css' %}" rel="stylesheet" />
     </head>
@@ -104,7 +104,7 @@
                         <div class="post-preview">
                             <a href="{% url 'book:book-detail' book.id %}">
                                 <h2 class="post-title">Este es el libro de {{ book.name }}</h2>
-                                <h3 class="post-subtitle">Que tiene el código: {{ book.author }}</h3>
+                                <h3 class="post-subtitle">Que tiene el author: {{ book.author }}</h3>
                             </a>
                             <p class="post-meta">
                                 Creado por

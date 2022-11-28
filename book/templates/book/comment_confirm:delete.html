@@ -7,7 +7,6 @@
 {{ block.super }}
 {% endblock %}
 <!-- ckeditor-->
-
 {% block library_title %}
 Book Create-Update
 {% endblock %}
@@ -15,23 +14,20 @@ Book Create-Update
 {% block library_header %}
 <header>
     <div>
-                     <h2>Formulario para guardar/editar libro</h2>
+                     <h2>Formulario eliminar comentario</h2>
                     <span>My Library</span>
     </div>
 </header>
 {% endblock %}
 
 {% block library_content %}
-<div>
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %} 
-        {{ form.media }} <!-- ckeditor-->
-        {{ form.as_p }}
-        <input type="submit" class="btn btn-primary" value="Guardar Libro" />
-    </form>
-</div>
+<h1>Estás seguro de eliminar el siguiente Comentario?</h1>
+<p>{{ comment.text }}</p>
 
-<!-- Divider-->
-<hr/>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="Si, eliminar.">
+    <a class="btn btn-primary" href="{% url 'book:book-detail' comment.book.id %}" >Cancelar</a>
+</form>
 
 {% endblock %}

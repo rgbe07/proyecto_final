@@ -1,0 +1,72 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block library_title %}
+Book Create-Update
+{% endblock %}
+
+{% block library_header %}
+<header>
+    <div>
+                     <h2>Formulario para guardar/editar curso</h2>
+                    <span>My Library</span>
+    </div>
+</header>
+{% endblock %}
+
+{% block library_content %}
+<!-- Post preview-->
+<div>
+    <h3>Libro: {{ book.name }}</h3>
+    <p>
+        Creado por
+        <span style="color: #0b4956;" href="">{{ book.owner.username }}</span>
+    </p>
+
+    <!-- Image -->
+    {% if book.image %}
+        <div style="text-align: center;">
+            <img height="250px" src="{{ book.image.url }}">
+        </div>
+    {% endif %}
+
+    <!-- Description -->
+    <p class="card-text ">{{ book.description|safe }}</p> <!-- ckeditor-->
+
+    <!-- Update-Delete link only for the owner -->
+    {% if user == book.owner or user.is_superuser %}
+        <p style="text-align: center">
+            <a href="{% url 'book:book-update' book.id %}">
+                <i class="fa fa-pencil" style="color: #1c1c91;"></i> Editar Libro
+            </a>
+            &ensp; | &ensp;
+            <a href="{% url 'book:book-delete' book.id %}">
+                <i class="fa fa-trash" style="color: #881a1a;"></i> Eliminar Libro
+            </a>
+        </p>
+    {% endif %}
+    
+    <!-- Divider-->
+    <hr />
+
+    <!-- Comment creation -->
+    <form method="POST" action="{% url 'book:comment-create' book.id %}">
+        {% csrf_token %}
+        {{ comment_form }}
+    <input type="submit" value="Publicar comentario">
+    </form>
+    {% if not comments %}
+        <p></p>
+    {% endif %}
+
+    <!-- Comments list -->
+    {% for comment in comments %}
+        <p> {{ comment.text }}
+            ({{ comment.owner.username }})
+            {% if user == comment.owner or user.is_superuser %}
+            <a href="{% url 'book:comment-delete' comment.id %}"><i class="fa fa-trash" style="color: #881a1a;"></i></a>
+            {% endif %}
+        </p>
+    {% endfor %}
+</div>
+{% endblock %}

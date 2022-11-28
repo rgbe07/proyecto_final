@@ -28,7 +28,7 @@ class Book(models.Model):
     
     
     def __str__(self):
-        return f"{self.name} | {self.author} | {self.publisher} | {self.isbn}"
+        return f"{self.name} | {self.author} | {self.publisher} | {self.isbn}| {self.image}"
 
 class Section(models.Model):
     name = models.CharField(max_length=40)

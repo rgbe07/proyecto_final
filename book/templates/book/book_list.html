@@ -2,16 +2,33 @@
 {% load static %}
 
 
+{% block library_title %}
+Book Create-Update
+{% endblock %}
+
+{% block library_header %}
+<header>
+    <div>
+                     <h2>Formulario para guardar/editar libro</h2>
+                    <span>My Library</span>
+    </div>
+</header>
+{% endblock %}
+
 {% block library_content %}
 
-    {% for book in books %}
+    {% for book in book_list %}
         <!-- Post preview-->
         <div class="container px-4">
-            <p>El título del libro es {{ book.name }}</p>
-            <p>Autor: {{ book.author }}</p>
-            <p>Editorial: {{ book.publisher }}</p>
-            <p>ISBN: {{ book.isbn }}</p>
-            
+            <a href="{% url 'book:book-detail' book.id %}">
+            <p>El libro es {{ book.name }}</p>
+            <p>Autor: {{ book.author }}</p></a>
+        <!----   <p>Editorial: {{ book.publisher }}</p>
+            <p>ISBN: {{ book.isbn }}</p>-->
+            <p class="post-meta">
+                Creado por
+                <span style="color: #0b4956;" href="">{{ book.owner.username }}</span>
+            </p>           
         </div>
         <!-- Divider-->
         <hr/>

@@ -17,17 +17,17 @@ from book.models import EBook
 
 class BookListView(ListView):
     model = Book
-    paginate_by = 3
+    paginate_by = 4
 
 
 class BookDetailView(DetailView):
     model = Book
     template_name = "book/book_detail.html"
-    fields = ["name", "author", "description"]
+    fields = ["name", "isbn", "author", "publisher", "description", "image"]
 
     def get(self, request, pk):
         book = Book.objects.get(id=pk)
-        comments = Comment.objects.filter(book=book).order_by("-name")
+        comments = Comment.objects.filter(book=book).order_by("-book")
         comment_form = CommentForm()
         context = {
             "book": book,
@@ -54,7 +54,7 @@ class BookCreateView(LoginRequiredMixin, CreateView):
         if actual_objects:
             messages.error(
                 self.request,
-                f"El libro {data['name']} - {data['author']} ya está creado",
+                f"El libro {data['name']} - {data['isbn']} ya está creado",
             )
             form.add_error("name", ValidationError("Acción no válida"))
             return super().form_invalid(form)
@@ -68,7 +68,7 @@ class BookCreateView(LoginRequiredMixin, CreateView):
 
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
-    fields = ["name", "isbn", "description", "image"]
+    fields = ["name", "isbn", "author", "publisher", "description", "image"]
 
     def get_success_url(self):
         book_id = self.kwargs["pk"]
