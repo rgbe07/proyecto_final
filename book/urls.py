@@ -19,7 +19,6 @@ urlpatterns = [
     path("book/<int:pk>/delete/", views.BookDeleteView.as_view(), name="book-delete"),
     path("comment/<int:pk>/add/", views.CommentCreateView.as_view(), name="comment-create"),
     path("comment/<int:pk>/delete/", views.CommentDeleteView.as_view(), name="comment-delete"),
-
     path("sections/", views.BookListView.as_view(), name="section-list"),
     path("section/add/", views.BookCreateView.as_view(), name="section-add"),
 

@@ -1,11 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.forms.models import model_to_dict
+
 
 from book.forms import CommentForm
 from book.forms import BookForm
@@ -65,17 +68,18 @@ class BookCreateView(LoginRequiredMixin, CreateView):
             )
             return super().form_valid(form)
 
-
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
     fields = ["name", "isbn", "author", "publisher", "description", "image"]
+    
+    success_url ="/"
 
     def get_success_url(self):
         book_id = self.kwargs["pk"]
         return reverse_lazy("book:book-detail", kwargs={"pk": book_id})
 
-    def post(self):
-        pass
+    #def post(self):
+    #    pass
 
 
 class BookDeleteView(LoginRequiredMixin, DeleteView):
