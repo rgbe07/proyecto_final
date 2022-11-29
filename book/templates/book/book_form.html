@@ -13,16 +13,19 @@ Book Create-Update
 {% endblock %}
 
 {% block library_header %}
-<header>
-    <div>
-                     <h2>Formulario para guardar/editar libro</h2>
-                    <span>My Library</span>
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+        <h1>Reseñas de Libros</h1>
+        <div></div>
+            <p class="lead">Formulario para crear/editar libro</p>
+
+        <div></div>            
     </div>
 </header>
 {% endblock %}
 
 {% block library_content %}
-<div>
+<div class="container px-4 text-center">
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %} 
         {{ form.media }} <!-- ckeditor-->

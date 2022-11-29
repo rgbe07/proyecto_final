@@ -27,6 +27,13 @@ def index(request):
         template_name="home/index.html",
     )
 
+def about(request):
+    return render(
+        request=request,
+        context=get_avatar_url_ctx(request),
+        template_name="home/about.html",
+    )    
+
 
 def search(request):
     search_param = request.GET["search_param"]

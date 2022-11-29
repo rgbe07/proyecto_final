@@ -7,10 +7,13 @@ Book Create-Update
 {% endblock %}
 
 {% block library_header %}
-<header>
-    <div>
-                     <h2>Formulario para guardar/editar libro</h2>
-                    <span>My Library</span>
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+       <h2>Listado de Libros</h2><div></div>
+                <p></p>    
+    </div>
+    <div class="container px-4 text-center"><p></p>
+        <a class="btn btn-primary" href="{% url 'book:book-add' %}">Crear Libro</a>
     </div>
 </header>
 {% endblock %}
@@ -21,10 +24,10 @@ Book Create-Update
         <!-- Post preview-->
         <div class="container px-4">
             <a href="{% url 'book:book-detail' book.id %}">
-            <p>El libro es {{ book.name }}</p>
-            <p>Autor: {{ book.author }}</p></a>
-        <!----   <p>Editorial: {{ book.publisher }}</p>
-            <p>ISBN: {{ book.isbn }}</p>-->
+            <p class="lead">Libro: {{ book.name }}</p>
+            <p class="lead">Autor: {{ book.author }}</p></a>
+            <p>Editorial: {{ book.publisher }}</p>
+            <p>ISBN: {{ book.isbn }}</p>
             <p class="post-meta">
                 Creado por
                 <span style="color: #0b4956;" href="">{{ book.owner.username }}</span>

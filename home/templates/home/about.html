@@ -1,0 +1,41 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+
+{% block library_title %}
+Book Create-Update
+{% endblock %}
+
+{% block library_header %}
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+                     <h2>Bienvenido a la Biblioteca de Reseñas</h2>
+    </div>
+</header>
+{% endblock %}
+
+{% block library_content %}
+
+            <p>
+                Aplicación web creada para buscar reseñas de libros y tener una referencia antes de adquirirlos.
+                También se permite  comentar de manera libre para enriquecer el contenido y conocer variedad de opiniones.
+                <p>
+                    Nace de la idea de poder encontrar recomendaciones y conocer la opinión de otras personas acerca de un libro
+                    antes de que sea adquirido de manera formal.
+                 </p>
+                 <p>
+                    Es un lugar de opinión libre siempre respetando la opinión de los demás usuarios.
+                 </p>
+                <p>
+                    Esperamos poder incorporar más material que sea de tu agrado, si deseas crear sugerencias 
+                    para incorporar nuevos titulos puedes escribirnos a tulibreria@gmail.com
+                <p>
+                    Será un placer escuchar tus opiniones y puntos de vista. 
+                </p>
+
+                </p>
+                <span style="color: #0b4956;" href="">{{ book.owner.username }}</span>
+            </p>           
+        <hr/>
+
+{% endblock %}
