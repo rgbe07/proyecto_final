@@ -16,8 +16,6 @@ ls
 ```bash
 git clone https://github.com/rgbe07/proyecto_final.git
 
-cd library
-
 git checkout master
 ```
 
@@ -49,13 +47,13 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 8. Se crea el super usuario para nuestro proyecto de Django, **Solo si no se ha creado**
+### 7. Se crea el super usuario para nuestro proyecto de Django, **Solo si no se ha creado**
 ```bash
 python manage.py createsuperuser
 ```
 Ingrese `Username`, `Email address` y `Password` 
 
-### 9. Se levanta el servidor de Django que expone el servicio por el localhost en el puerto 8000 por defecto `http://127.0.0.1:8000/`
+### 8. Se levanta el servidor de Django que expone el servicio por el localhost en el puerto 8000 por defecto `http://127.0.0.1:8000/`
 ```bash
 python manage.py runserver
 ```
