@@ -14,7 +14,7 @@ ls
 
 - Clonar el proyecto y cambiar de rama
 ```bash
-git clone https://github.com/rgbe07/entrega1-bernal-esparza/
+git clone https://github.com/rgbe07/proyecto_final.git
 
 cd library
 
